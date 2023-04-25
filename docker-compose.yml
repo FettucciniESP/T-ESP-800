@@ -1,17 +1,17 @@
 version: "3"
 services:
 
-  fetuccini-db:
-    container_name: fetuccini-db
+  db:
+    container_name: fettuccini-db
     image: postgres:11-alpine
     volumes:
-      - fetuccini-db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
   wiki:
     image: ghcr.io/requarks/wiki:2
     depends_on:
-      - fetuccini-db
+      - db
     ports:
       - "10080:3000"
 
 volumes:
-  fetuccini-db-data:
+  db-data:
