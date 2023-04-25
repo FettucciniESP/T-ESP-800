@@ -11,7 +11,8 @@ services:
       driver: "none"
     volumes:
       - db-data:/var/lib/postgresql/data
-
+    ports:
+      - "6543:5432"
   wiki:
     image: ghcr.io/requarks/wiki:2
     depends_on:
@@ -19,7 +20,7 @@ services:
     environment:
       DB_TYPE: postgres
       DB_HOST: db
-      DB_PORT: 5432
+      DB_PORT: 6543
       DB_USER: ${POSTGRES_USER}
       DB_PASS: ${POSTGRES_PASSWORD}
       DB_NAME: ${POSTGRES_DB}
