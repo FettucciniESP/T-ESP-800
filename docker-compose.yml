@@ -11,7 +11,7 @@ services:
     depends_on:
       - db
     ports:
-      - "10080:3000"
+      - "9980:3000"
 
 volumes:
   db-data:
