@@ -4,24 +4,12 @@ services:
   fetuccini-db:
     container_name: fetuccini-db
     image: postgres:11-alpine
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_USER: ${POSTGRES_USER}
-
     volumes:
       - fetuccini-db-data:/var/lib/postgresql/data
   wiki:
     image: ghcr.io/requarks/wiki:2
     depends_on:
       - fetuccini-db
-    environment:
-      DB_TYPE: postgres
-      DB_HOST: fetuccini-db
-      DB_PORT: 5432
-      DB_USER: ${POSTGRES_USER}
-      DB_PASS: ${POSTGRES_PASSWORD}
-      DB_NAME: ${POSTGRES_DB}
     ports:
       - "10080:3000"
 
