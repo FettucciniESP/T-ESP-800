@@ -1,7 +1,7 @@
 version: "3"
 services:
 
-  db:
+  database_postgress:
     image: postgres:11-alpine
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
@@ -11,14 +11,14 @@ services:
     logging:
       driver: "none"
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - database_postgress-data:/var/lib/postgresql/data
   wiki:
     image: ghcr.io/requarks/wiki:2
     depends_on:
-      - db
+      - database_postgress
     environment:
       DB_TYPE: postgres
-      DB_HOST: db
+      DB_HOST: database_postgress
       DB_PORT: 5432
       DB_USER: ${POSTGRES_USER}
       DB_PASS: ${POSTGRES_PASSWORD}
@@ -27,4 +27,4 @@ services:
       - "10080:3000"
 
 volumes:
-  db-data:
+  database_postgress-data:
